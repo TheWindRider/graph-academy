@@ -1,0 +1,22 @@
+query AthletePerformance($date_start: String, $date_end: String) {
+  athletes(sort: {total_stats: DESC}, limit: 10) {
+    name
+    total_stats(date_end: $date_end, date_start: $date_start)
+  }
+}
+
+query AthleteTrade {
+  athletes(where: {competeForteamsAggregate: {count_GTE: 2}}) {
+    name
+    competeForteamsConnection(sort: {edge: {first_date: ASC}}) {
+      edges {
+        properties {
+          first_date
+        }
+        node {
+          name
+        }
+      }
+    }
+  }
+}

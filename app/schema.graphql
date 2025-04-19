@@ -1,0 +1,78 @@
+type athleteCompeteForteamProperties @relationshipProperties {
+  first_date: String!
+  jersey: BigInt!
+  last_date: String!
+}
+
+type teamCompeteIngameProperties @relationshipProperties {
+  home_or_away: String
+  is_winner: Boolean
+}
+
+type athleteCompeteIngameProperties @relationshipProperties {
+  poins: Int!
+  assists: Int!
+  rebounds: Int!
+}
+
+type athlete @node {
+  competeForteams: [team!]!
+    @relationship(
+      type: "compete_for"
+      direction: OUT
+      properties: "athleteCompeteForteamProperties"
+    )
+  competeIngames: [game!]!
+    @relationship(
+      type: "compete_in"
+      direction: OUT
+      properties: "athleteCompeteIngameProperties"
+    )
+  id: BigInt!
+  name: String!
+  name_short: String!
+  total_stats(date_start: String, date_end: String): Int @cypher(
+    statement: """
+      MATCH (this)-[c:compete_in]->(g:game)
+      WHERE g.date >= $date_start AND g.date < $date_end
+      RETURN this.name AS athlete_name, sum(size(keys(c))) AS total_stats
+    """
+    columnName: "total_stats"
+  )
+}
+
+type game @node {
+  athletescompeteIn: [athlete!]!
+    @relationship(
+      type: "compete_in"
+      direction: IN
+      properties: "athleteCompeteIngameProperties"
+    )
+  date: String!
+  id: BigInt!
+  name: String!
+  teamscompeteIn: [team!]!
+    @relationship(
+      type: "compete_in"
+      direction: IN
+      properties: "teamCompeteIngameProperties"
+    )
+}
+
+type team @node {
+  athletescompeteFor: [athlete!]!
+    @relationship(
+      type: "compete_for"
+      direction: IN
+      properties: "athleteCompeteForteamProperties"
+    )
+  competeIngames: [game!]!
+    @relationship(
+      type: "compete_in"
+      direction: OUT
+      properties: "teamCompeteIngameProperties"
+    )
+  id: BigInt!
+  name: String!
+  name_short: String!
+}

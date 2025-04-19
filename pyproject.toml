@@ -1,0 +1,26 @@
+[project]
+name = "graph-academy"
+version = "0.1.0"
+dependencies = [
+    "python-dotenv",
+    "langchain",
+    "langchain-community",
+    "langchain_openai",
+    "openai",
+    "neo4j",
+    "networkx",
+    "graphdatascience",
+    "pygraphviz",
+    "pandas",
+    "lxml",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+post-process = "neo4j_post_process:post_process"
+
+[tool.setuptools.packages.find]
+where = ["./etl"]

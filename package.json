@@ -1,0 +1,21 @@
+{
+  "name": "graph-academy",
+  "version": "1.0.0",
+  "description": "graph data exercise",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node app/index.js",
+    "test": "npm test"
+  },
+  "author": "Chenguang Yang",
+  "license": "MIT",
+  "dependencies": {
+    "@neo4j/graphql": "^6.4.0",
+    "apollo-server": "^3.13.0",
+    "dotenv": "^16.4.7",
+    "neo4j-driver": "^5.28.1"
+  }
+}
