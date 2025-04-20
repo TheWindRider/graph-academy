@@ -6,9 +6,10 @@ from datetime import date, timedelta
 from dotenv import load_dotenv
 
 from models import GraphSports
+from graphs import GraphNeo4j
 from api_to_json import get_espn_api_scoreboard, extract_events
 from json_to_pydantic import GraphPydanticManual
-from pydantic_to_neo4j import GraphNeo4j
+from pydantic_to_neo4j import build_graph
 
 load_dotenv()
 
@@ -48,4 +49,4 @@ if __name__ == "__main__":
         with open(file_path, "r") as input_file:
             sports_pydantic_data = json.load(input_file)
         sports_graph_data = GraphSports.model_validate(sports_pydantic_data)
-        sports_neo4j_data.build_graph(sports_graph_data)
+        build_graph(sports_neo4j_data, sports_graph_data)
