@@ -3,8 +3,8 @@ import json
 import glob
 from datetime import date, timedelta
 from dotenv import load_dotenv
-from graphs import GraphNeo4j
-from models import GraphSports
+from etl.graphs import GraphNeo4j
+from etl.models import GraphSports
 
 load_dotenv()
 

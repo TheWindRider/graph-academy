@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from ast import literal_eval
 from dotenv import load_dotenv
-from graphs import GraphNeo4j
+from etl.graphs import GraphNeo4j
 from pandas.core.common import flatten
 
 load_dotenv()

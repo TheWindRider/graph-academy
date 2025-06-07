@@ -4,7 +4,7 @@ import json
 from datetime import date, timedelta
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from models import (
+from etl.models import (
     GraphSports,
     Game,
     Team,

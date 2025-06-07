@@ -3,7 +3,7 @@ import networkx as nx
 import pygraphviz as pgv
 from dotenv import load_dotenv
 from neo4j import GraphDatabase, Driver
-from models import (
+from etl.models import (
     GraphSports,
     AthleteCompeteIn,
     AthleteCompeteFor,
@@ -220,8 +220,9 @@ class GraphNetworkx:
         return f"Graph with {num_nodes} nodes and {num_edges} edges"
 
     def draw_graph(self) -> None:
+        test_dir = os.path.join(os.path.dirname(__file__), "..", "test")
         agraph: pgv.AGraph = nx.nx_agraph.to_agraph(self.graph)
-        agraph.draw(f"../test/{self.name}.png", prog="circo")
+        agraph.draw(f"{test_dir}/{self.name}.png", prog="fdp")
 
     def add_edges(self, edge_list: list) -> None:
         self.graph.add_edges_from(edge_list)

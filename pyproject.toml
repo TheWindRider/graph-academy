@@ -20,7 +20,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-post-process = "neo4j_post_process:post_process"
+post-process = "etl.neo4j_post_process:post_process"
 
 [tool.setuptools.packages.find]
-where = ["./etl"]
+where = ["./etl", "./rag"]

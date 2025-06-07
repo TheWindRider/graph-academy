@@ -1,4 +1,4 @@
-from graphs import GraphNeo4j, GraphNetworkx
+from etl.graphs import GraphNeo4j, GraphNetworkx
 
 
 def neo4j_get_edges_agent_athlete(graph: GraphNeo4j) -> list:

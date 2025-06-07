@@ -1,6 +1,5 @@
-import networkx as nx
 from dotenv import load_dotenv
-from graphs import GraphNeo4j, GraphNetworkx
+from etl.graphs import GraphNeo4j
 
 load_dotenv()
 
@@ -13,21 +12,6 @@ def neo4j_merge_nodes(graph_neo4j: GraphNeo4j) -> None:
             f"{num_athlete_consolidated} athletes and ",
             f"{num_team_consolidated} teams consolidated",
         )
-
-
-def detect_community_agent_athlete(graph_networkx: GraphNetworkx) -> None:
-    community_agent_athlete = nx.community.louvain_communities(
-        graph_networkx.graph, seed=123
-    )
-    for community_id, community_member in enumerate(community_agent_athlete):
-        if len(community_member) < 10:
-            continue
-        print(f"community {community_id} has {len(community_member)} members")
-        graph_community = GraphNetworkx(
-            graph_name=f"community_{community_id}",
-            graph_content=nx.induced_subgraph(graph_networkx.graph, community_member),
-        )
-        graph_community.draw_graph()
 
 
 def post_process():

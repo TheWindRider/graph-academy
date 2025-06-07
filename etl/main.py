@@ -5,11 +5,11 @@ import json
 from datetime import date, timedelta
 from dotenv import load_dotenv
 
-from models import GraphSports
-from graphs import GraphNeo4j
-from api_to_json import get_espn_api_scoreboard, extract_events
-from json_to_pydantic import GraphPydanticManual
-from pydantic_to_neo4j import build_graph
+from etl.models import GraphSports
+from etl.graphs import GraphNeo4j
+from etl.api_to_json import get_espn_api_scoreboard, extract_events
+from etl.json_to_pydantic import GraphPydanticManual
+from etl.pydantic_to_neo4j import build_graph
 
 load_dotenv()
 
